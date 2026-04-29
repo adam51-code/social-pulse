@@ -1,11 +1,7 @@
-name: Daily X Scrape
+name: X Social Listening Scrape
 
 on:
-  schedule:
-    # 11:00 UTC = 7am EDT / 6am EST. Edit this if you want a different time.
-    # Format: minute hour day-of-month month day-of-week
-    - cron: '0 11 * * *'
-  workflow_dispatch:  # lets you trigger manually from the Actions tab
+  workflow_dispatch:  # manual trigger only — runs when you click "Trigger refresh"
 
 permissions:
   contents: write  # needed so the workflow can commit data.json back to the repo

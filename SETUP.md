@@ -53,14 +53,18 @@ Replace with your actual `owner/repo`, then commit and push.
 
 ## Done
 
-After this, the workflow runs every day at **11:00 UTC (7am EDT / 6am EST)**. To change:
-- Edit `.github/workflows/daily-scrape.yml`, change the `cron:` line.
-- [crontab.guru](https://crontab.guru) helps with cron syntax.
+The scrape runs **only when you trigger it** (click the "Trigger refresh" button on the dashboard, or "Run workflow" on the GitHub Actions page). No automatic schedule.
 
 To change keywords, edit `keywords.json` and push. The next run picks them up.
 
+If you later want a daily auto-refresh, add this back to `.github/workflows/daily-scrape.yml` above the `workflow_dispatch:` line:
+```yaml
+  schedule:
+    - cron: '0 11 * * *'  # 11:00 UTC = 7am EDT / 6am EST
+```
+
 ## Cost
 
-- GitHub Actions: free (~2 min/day, well under the 2,000 min/mo free quota for private repos; unlimited for public).
-- Apify: ~$0.10–0.15 per run × 30 runs/mo ≈ **$3–5/month**.
-- Anthropic (optional summary): ~$0.02 per run ≈ **$0.60/month**.
+- GitHub Actions: free for public repos; well under quota for private.
+- Apify: ~$0.10–0.15 per scrape — **you only pay when you click refresh**.
+- Anthropic (optional summary): ~$0.02 per scrape if enabled.
